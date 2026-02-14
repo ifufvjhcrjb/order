@@ -1,0 +1,25 @@
+{
+  "name": "kaiimarket-ai-saldo-bot",
+  "version": "1.0.0",
+  "description": "Bot Telegram AI untuk analisis bukti pembayaran otomatis dan membuat server panel dengan sistem saldo dan QRIS deposit.",
+  "type": "module",
+  "main": "bot.js",
+  "scripts": {
+    "start": "node bot.js",
+    "dev": "nodemon bot.js"
+  },
+  "author": "KaiiMarket",
+  "license": "MIT",
+  "dependencies": {
+    "node-telegram-bot-api": "^0.61.0",
+    "fs-extra": "^11.2.0",
+    "node-fetch": "^3.3.2",
+    "express": "^4.19.2",
+    "body-parser": "^1.20.2",
+    "axios": "^1.6.7",
+    "qrcode": "^1.5.4"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.0"
+  }
+}
