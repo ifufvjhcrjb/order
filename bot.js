@@ -480,6 +480,10 @@ Silakan masukkan nominal 👇
   if (nominal < 500) {
     return bot.sendMessage(chatId, "❌ Minimal deposit Rp500");
   }
+  if (nominal > 50000) {
+    return bot.sendMessage(chatId, "ngapa deposit banyak²? mau sok kerenlu? \n di bayar kagak bego lu anjing");
+  }
+
 
   const orderId = `INV${Date.now()}`;
 
@@ -663,11 +667,9 @@ bot.onText(/^\/listdeposit$/, async (msg) => {
 
   for (const [orderId, order] of list) {
     text +=
-`<blockquote>🆔 <b>${orderId}</b>
-👤 User ID : <code>${order.userId}</code>
+`<blockquote>🆔 <b>${orderId}</b>👤 User ID : <code>${order.userId}</code>
 💰 Nominal : Rp${order.amount.toLocaleString("id-ID")}
-⏳ Status : Menunggu pembayaran
-</blockquote>\n`;
+⏳ Status : Menunggu pembayaran</blockquote>\n`;
   }
 
   bot.sendMessage(chatId, text, { parse_mode: "HTML" });
@@ -786,7 +788,7 @@ bot.onText(/\/data/, async (msg) => {
         let hasil = `📊 <b>Data Pengguna (Halaman ${pageNow + 1}/${totalPage})</b>\n────────────────────────────\n`;
 
         for (const [id, user] of slice) {
-            hasil += `🆔 <code>${id}</code>\n👤 <b>${user.nama || "Tidak diketahui"}</b>\n💰 Rp${user.saldo?.toLocaleString() || 0}\n👥 Referral: ${user.referrals || 0}\n🎁 Gratis: ${user.gratis ? "✅ Sudah Claim" : "❌ Belum Claim"}\n📅 Last Claim: ${user.lastClaim || "-"}\n────────────────────────────\n`;
+            hasil += `🆔 <code>${id}</code>\n💰 Rp${user.saldo?.toLocaleString() || 0}\n👥 Referral: ${user.referrals || 0}\n🎁 Gratis: ${user.gratis ? "✅ Sudah Claim" : "❌ Belum Claim"}\n📅 Last Claim: ${user.lastClaim || "-"}\n────────────────────────────\n`;
         }
 
         const keyboard = [];
@@ -825,7 +827,7 @@ bot.on("show_page", async ({ chatId, page }) => {
     let hasil = `📊 <b>Data Pengguna (Halaman ${page + 1}/${totalPage})</b>\n────────────────────────────\n`;
 
     for (const [id, user] of slice) {
-        hasil += `🆔 <code>${id}</code>\n👤 <b>${user.nama || "Tidak diketahui"}</b>\n💰 Rp${user.saldo?.toLocaleString() || 0}\n👥 Referral: ${user.referrals || 0}\n🎁 Gratis: ${user.gratis ? "✅ Sudah Claim" : "❌ Belum Claim"}\n📅 Last Claim: ${user.lastClaim || "-"}\n────────────────────────────\n`;
+        hasil += `🆔 <code>${id}</code>\n💰 Rp${user.saldo?.toLocaleString() || 0}\n👥 Referral: ${user.referrals || 0}\n🎁 Gratis: ${user.gratis ? "✅ Sudah Claim" : "❌ Belum Claim"}\n📅 Last Claim: ${user.lastClaim || "-"}\n────────────────────────────\n`;
     }
 
     const keyboard = [];
@@ -1635,7 +1637,7 @@ bot.onText(/\/stop/, msg => {
                     });
 
                     console.log("🛑 Bot dimatikan sekarang.");
-                    return process.exit(1);
+                    return process.exit(0);
                 }
 
                 // Update pesan dengan langkah berikutnya
